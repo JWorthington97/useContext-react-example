@@ -1,26 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import ChildWithProps from './components/ChildWithProps';
+import ChildWithContext from './components/ChildWithContext';
+import { createContext } from 'react';
+
+// Step 1: Creating the 'context outside of App
+export const TextContext = createContext("")
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const text = "hello, world!"
+
+  return <>
+    <ChildWithProps text={text}/> 
+    <hr />
+
+    {/* Step 2: 'Provide' the context with a value */}
+    <TextContext.Provider value={text}>
+      <ChildWithContext />
+    </TextContext.Provider>
+  </>
 }
 
 export default App;
